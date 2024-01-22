@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_nav"
-    app:startDestination="@navigation/flights_navigation">
+    app:startDestination="@id/flights_navigation">
 
     <include app:graph="@navigation/account_navigation"></include>
     <include app:graph="@navigation/flights_navigation"></include>
