@@ -31,7 +31,7 @@ class SearchListFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.button.setOnClickListener {
-            viewModel.getFlights()
+
         }
 
         viewModel.data.observe(viewLifecycleOwner){

@@ -40,8 +40,8 @@ android {
 
 dependencies {
 
-    implementation(project(":data")) // data не должно здесь находиться
-
+    //implementation(project(":data")) // data не должно здесь находиться
+    implementation(project(":domain"))
     implementation(project(":entities"))
 
     implementation("androidx.core:core-ktx:1.12.0")

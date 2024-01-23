@@ -1,6 +1,9 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+
+    id(Pluggins.kotlinKapt)
+    id(Pluggins.hilt)
 }
 
 android {
@@ -33,6 +36,11 @@ android {
 }
 
 dependencies {
+    implementation(project(":data"))
+    implementation(project(":common"))
+
+    implementation(Libs.Hilt.hilt)
+    kapt(Libs.Hilt.hiltKapt)
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
