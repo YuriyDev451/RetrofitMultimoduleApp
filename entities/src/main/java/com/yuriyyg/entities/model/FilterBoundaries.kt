@@ -1,4 +1,4 @@
-package com.yuriyyg.entities
+package com.yuriyyg.entities.model
 
 data class FilterBoundaries(
     val departureMaxDuration: Int,

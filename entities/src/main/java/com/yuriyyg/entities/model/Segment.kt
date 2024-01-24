@@ -1,4 +1,4 @@
-package com.yuriyyg.entities
+package com.yuriyyg.entities.model
 
 data class Segment(
     val arrival_datetime: ArrivalDatetime,

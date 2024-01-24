@@ -1,6 +1,6 @@
 package com.yuriyyg.data
 
-import com.yuriyyg.entities.SearchResponse
+import com.yuriyyg.entities.model.SearchResponse
 import com.yuriyyg.network.api.ApiService
 import javax.inject.Inject
 

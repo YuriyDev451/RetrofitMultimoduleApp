@@ -1,4 +1,4 @@
-package com.yuriyyg.entities
+package com.yuriyyg.entities.model
 
 data class SearchParameters(
     val adult: Int,

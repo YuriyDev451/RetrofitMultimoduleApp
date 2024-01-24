@@ -1,6 +1,6 @@
-package com.yuriyyg.entities
+package com.yuriyyg.entities.model
 
-data class PriceBreakdown(
+data class AveragePriceBreakdown(
     val base: Int,
     val currency: String,
     val discount: Int,

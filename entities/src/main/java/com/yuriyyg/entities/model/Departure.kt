@@ -1,4 +1,4 @@
-package com.yuriyyg.entities
+package com.yuriyyg.entities.model
 
 data class Departure(
     val average_price_breakdown: AveragePriceBreakdown,

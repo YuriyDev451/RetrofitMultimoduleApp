@@ -1,10 +1,10 @@
 package com.yuriyyg.network.api
 
-import com.yuriyyg.entities.SearchResponse
+import com.yuriyyg.entities.model.SearchResponse
 import retrofit2.http.GET
 
 interface ApiService {
 
     @GET("flights")
-    suspend fun getFlights():SearchResponse?
+    suspend fun getFlights(): SearchResponse?
 }

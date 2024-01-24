@@ -1,4 +1,4 @@
-package com.yuriyyg.entities
+package com.yuriyyg.entities.model
 
 data class Infos(
     val active_warning: Any,
