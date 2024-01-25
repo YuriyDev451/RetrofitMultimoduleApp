@@ -2,21 +2,25 @@ package com.yuriyyg.flights
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.yuriyyg.common.Resource
-import com.yuriyyg.common.State
+import com.yuriyyg.common.base.BaseViewModel
+import com.yuriyyg.common.flowState.Resource
+import com.yuriyyg.common.flowState.State
+import com.yuriyyg.domain.mapper.SearchResponseToUIStateMapper
 import com.yuriyyg.domain.usecases.SearchListUseCase
-import com.yuriyyg.entities.model.SearchResponse
+import com.yuriyyg.entities.uimodel.FlightSearchUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchListViewModel @Inject constructor(val searchListUseCase: SearchListUseCase):ViewModel() {
+class SearchListViewModel @Inject constructor(val searchListUseCase: SearchListUseCase,
+                                              private val mapper: SearchResponseToUIStateMapper
+):BaseViewModel() {
 
-    val state: MutableStateFlow<State?> = MutableStateFlow(null)
 
-    val data = MutableLiveData<SearchResponse?>()
+
+    val data = MutableLiveData<FlightSearchUIState?>()
 
     suspend fun getFlights(){
         searchListUseCase.getFlight().collectLatest{
@@ -25,7 +29,11 @@ class SearchListViewModel @Inject constructor(val searchListUseCase: SearchListU
                 is Resource.Loading -> state.emit(State.loading())
                 is Resource.Success -> {
                     state.emit(State.success())
-                    data.postValue(it.data)
+                    it.data?.data?.let {
+                        val mappedData= mapper.map(it)
+                        data.postValue(mappedData)
+                    }
+
                 }
             }
         }

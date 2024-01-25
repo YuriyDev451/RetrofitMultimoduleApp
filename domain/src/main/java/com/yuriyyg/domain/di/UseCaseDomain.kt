@@ -1,6 +1,7 @@
 package com.yuriyyg.domain.di
 
 import com.yuriyyg.data.FlightRepositoryInterface
+import com.yuriyyg.domain.mapper.SearchResponseToUIStateMapper
 import com.yuriyyg.domain.usecases.SearchListUseCase
 import dagger.Module
 import dagger.Provides
@@ -14,5 +15,7 @@ class UseCaseDomain {
 
     @Provides
     @Singleton
-    fun provideUseCase(repositoryInterface: FlightRepositoryInterface) = SearchListUseCase(repositoryInterface)
+    fun provideUseCase(repositoryInterface: FlightRepositoryInterface,
+                       mapper: SearchResponseToUIStateMapper
+    ) = SearchListUseCase(repositoryInterface, mapper)
 }

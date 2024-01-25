@@ -1,4 +1,4 @@
-package com.yuriyyg.common
+package com.yuriyyg.common.flowState
 
 class State(val status: Status, var message: String? = null) {
      companion object{
@@ -6,7 +6,7 @@ class State(val status: Status, var message: String? = null) {
 
          fun error(message: String?): State = State(status = Status.ERROR, message = message)
 
-         fun loading(): State= State(status = Status.LOADING)
+         fun loading(): State = State(status = Status.LOADING)
 
      }
 

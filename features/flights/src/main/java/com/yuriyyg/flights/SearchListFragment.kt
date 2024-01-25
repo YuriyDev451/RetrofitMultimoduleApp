@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.yuriyyg.common.Status
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.yuriyyg.common.base.BaseFragment
+import com.yuriyyg.common.flowState.Status
 import com.yuriyyg.flights.databinding.FragmentSearchListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -15,53 +17,37 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class SearchListFragment: Fragment() {
+class SearchListFragment: BaseFragment<FragmentSearchListBinding>(FragmentSearchListBinding::inflate) {
 
-    lateinit var binding: FragmentSearchListBinding
 
     val viewModel: SearchListViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSearchListBinding.inflate(inflater)
-        return binding.root
+    private lateinit var adapter: SearchListAdapter
+    override fun fetchViewModel(): SearchListViewModel {
+        return viewModel
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.button.setOnClickListener {
-            lifecycleScope.launch {
-                viewModel.getFlights()
-            }
-
-        }
+        initRecyclerAdapter()
 
         lifecycleScope.launch {
-            viewModel.state.collectLatest { state->
-                state?.let {
-                    when(it.status){
-                        Status.SUCCESS -> showLoadingProgress(false)
-                        Status.ERROR -> showLoadingProgress(false)
-                        Status.LOADING -> showLoadingProgress(true)
-                    }
-                }
-            }
+            viewModel.getFlights()
         }
+
+
 
         viewModel.data.observe(viewLifecycleOwner){
-
+            adapter.setData(it?.flights ?: listOf())
         }
     }
 
-    fun showLoadingProgress(isLoad : Boolean){
-
-
-
+    private fun initRecyclerAdapter(){
+        adapter = SearchListAdapter()
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.adapter = adapter
     }
+
 
 }

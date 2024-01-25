@@ -1,13 +1,17 @@
 package com.yuriyyg.domain.usecases
 
-import com.yuriyyg.common.Resource
+import com.yuriyyg.common.flowState.Resource
 import com.yuriyyg.data.FlightRepositoryInterface
+import com.yuriyyg.domain.mapper.SearchResponseToUIStateMapper
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 
-class SearchListUseCase @Inject constructor(val repositoryInterface: FlightRepositoryInterface) {
+class SearchListUseCase @Inject constructor(
+    private val repositoryInterface: FlightRepositoryInterface,
+    private val mapper: SearchResponseToUIStateMapper
+) {
 
     //invoke()  ola biler
 
