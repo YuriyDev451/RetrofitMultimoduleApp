@@ -2,6 +2,7 @@ package com.yuriyyg.network.di
 
 import com.google.gson.Gson
 import com.yuriyyg.network.api.ApiService
+import com.yuriyyg.network.interceptors.TokenInjector
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,7 +47,7 @@ class DataLayerModule {
     @Provides
     @Singleton
     @FlightAnnotation
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(tokenInjector: TokenInjector): OkHttpClient {
         val client = OkHttpClient.Builder()
 
         val loggingInterceptor = HttpLoggingInterceptor()
@@ -58,6 +59,7 @@ class DataLayerModule {
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(tokenInjector)
         return client.build()
     }
 }

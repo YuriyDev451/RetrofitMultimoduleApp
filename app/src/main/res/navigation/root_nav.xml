@@ -4,7 +4,8 @@
     android:id="@+id/root_nav"
     app:startDestination="@id/flights_navigation">
 
-    <include app:graph="@navigation/account_navigation"></include>
-    <include app:graph="@navigation/flights_navigation"></include>
+    <include app:graph="@navigation/account_navigation"/>
+    <include app:graph="@navigation/flights_navigation"/>
+    <include app:graph="@navigation/detail_navigation"/>
 
 </navigation>

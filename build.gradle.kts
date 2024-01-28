@@ -3,4 +3,6 @@ plugins {
     id(Pluggins.androidApplication) version Versions.androidApplication apply false
     id(Pluggins.jetbrainsKotlin) version Versions.jetbrainsKotlin apply false
     id(Classpath.hilt) version Versions.hilt apply false
+    id("androidx.navigation.safeargs") version "2.7.3" apply false
+
 }
